@@ -1,21 +1,24 @@
-from flask import Flask 
-from dotenv import load_dotenv
-try:
-    from .Models import db
-    from .Routes.routes import api
-except ImportError:
-    from Models import db
-    from Routes.routes import api
 import os
+
+from dotenv import load_dotenv
+from flask import Flask
+from flask_jwt_extended import JWTManager
+
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
+from .Models import db
+from .Routes.routes import api
 
 def create_app(config_overrides=None):
     app = Flask(__name__)
-    load_dotenv()
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLITE_URL')
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET')
     if config_overrides:
         app.config.update(config_overrides)
     db.init_app(app)
+    JWTManager(app)
     with app.app_context():
+        db.drop_all()
         db.create_all()
     app.register_blueprint(api)
     return app
