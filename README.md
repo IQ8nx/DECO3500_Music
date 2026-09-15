@@ -18,3 +18,5 @@ Maybe animation for big jams etc
 
 Increase the rate of updating data maybe reduce the rounding on the coords so less jumping
 
+Make it so if there are multiple users close together i can still click on a user
+Spotify whitelist/allowlist for users that arent me (noah stevens) still breaks so will have to email
