@@ -3,3 +3,8 @@
 *.pyo
 *.pyd
 */app.db
+/.venv/*
+/certbot/conf/*
+/certbot/www/*
+*/.env
+.env
